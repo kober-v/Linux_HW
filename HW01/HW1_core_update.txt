@@ -1,0 +1,38 @@
+==============Core update===============
+
+kober@altair:~$ mkdir Ubuntu_gen2004
+kober@altair:~$ vagrant init generic/ubuntu2010
+kober@altair:~$ mv Vagrantfile /home/kober/Ubuntu_gen2004/
+kober@altair:~$ cd Ubuntu_gen2004/
+kober@altair:~/Ubuntu_gen2004$ vagrant up
+kober@altair:~/Ubuntu_gen2004$ vagrant ssh
+
+vagrant@ubuntu2010:~$ sudo apt update
+vagrant@ubuntu2010:~$ mkdir Core_update
+vagrant@ubuntu2010:~$ cd Core_update/
+vagrant@ubuntu2010:~/Core_update$ wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.3.9/amd64/linux-headers-6.3.9-060309-generic_6.3.9-060309.202306271338_amd64.deb
+vagrant@ubuntu2010:~/Core_update$ wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.3.9/amd64/linux-headers-6.3.9-060309_6.3.9-060309.202306271338_all.deb
+vagrant@ubuntu2010:~/Core_update$ wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.3.9/amd64/linux-image-unsigned-6.3.9-060309-generic_6.3.9-060309.202306271338_amd64.deb
+vagrant@ubuntu2010:~/Core_update$ wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.3.9/amd64/linux-modules-6.3.9-060309-generic_6.3.9-060309.202306271338_amd64.deb
+--2023-07-07 12:08:05--  https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.3.9/amd64/linux-modules-6.3.9-060309-generic_6.3.9-060309.202306271338_amd64.deb
+vagrant@ubuntu2010:~/Core_update$ ls -l
+total 123252
+-rw-rw-r-- 1 vagrant vagrant 12966480 Jun 27 13:50 linux-headers-6.3.9-060309_6.3.9-060309.202306271338_all.deb
+-rw-rw-r-- 1 vagrant vagrant  3246542 Jun 27 13:49 linux-headers-6.3.9-060309-generic_6.3.9-060309.202306271338_amd64.deb
+-rw-rw-r-- 1 vagrant vagrant 13824192 Jun 27 13:49 linux-image-unsigned-6.3.9-060309-generic_6.3.9-060309.202306271338_amd64.deb
+-rw-rw-r-- 1 vagrant vagrant 96163208 Jun 27 13:49 linux-modules-6.3.9-060309-generic_6.3.9-060309.202306271338_amd64.deb
+
+vagrant@ubuntu2010:~/Core_update$ uname -r
+5.8.0-63-generic
+vagrant@ubuntu2010:~/Core_update$ uname -p
+x86_64
+vagrant@ubuntu2010:~/Core_update$ sudo dpkg -i ./*.deb
+vagrant@ubuntu2010:~/Core_update$ sudo update-grub
+vagrant@ubuntu2010:~/Core_update$ sudo reboot
+Connection to 127.0.0.1 closed by remote host.
+Connection to 127.0.0.1 closed.
+kober@altair:~/Ubuntu_gen2004$ vagrant ssh
+Last login: Fri Jul  7 11:51:18 2023 from 10.0.2.2
+vagrant@ubuntu2010:~$ uname -r
+6.3.9-060309-generic
+
